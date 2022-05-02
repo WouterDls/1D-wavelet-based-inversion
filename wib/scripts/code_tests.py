@@ -26,7 +26,7 @@ mesh.plot_slice(model)
 # %%
 
 importlib.reload(regularization)
-reg = regularization.WaveletRegularization(mesh)
+reg = regularization.WaveletRegularization1D(mesh)
 reg(model)
 
 model.shape

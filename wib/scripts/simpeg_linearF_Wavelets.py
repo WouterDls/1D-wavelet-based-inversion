@@ -1,5 +1,8 @@
-# @ Robin: Set beta (=regu paramter) equal to zero and see that this is basically a non-example!
-# This example doesn't need regularization!
+"""
+Example from SimPEG
+
+"""
+
 
 # Linear Least-Squares Inversion
 
@@ -21,12 +24,11 @@ from SimPEG import (
     data_misfit,
     directives,
     optimization,
-    regularization,
     inverse_problem,
     inversion,
 )
 from discretize import TensorMesh
-from wib.src import wavelet_regularization_f as wav_reg
+from wib.src import wavelet_regularization as regularization
 
 ## Defining the Model and Mapping
 
@@ -134,10 +136,14 @@ data_obj = sim.make_synthetic_data(true_model, relative_error=std, add_noise=Tru
 # Within the data misfit, the residual between predicted and observed data are
 # normalized by the data's standard deviation.
 dmis = data_misfit.L2DataMisfit(simulation=sim, data=data_obj)
-importlib.reload(wav_reg)
 # Define the regularization (model objective function).
-reg = wav_reg.WaveletRegularization1D(mesh, wav='db2')
-reg.mref = np.zeros(nParam)
+"""
+Play here with the wav-parameter
+- db1 = blocky
+- db2, db3, db4 = rather sharp
+- db5+ = rather smooth
+"""
+reg = regularization.WaveletRegularization1D(mesh, wav='db3')
 
 # Define how the optimization problem is solved.
 opt = optimization.InexactGaussNewton(maxIter=100, maxIterLS=20)
@@ -152,9 +158,6 @@ inv_prob = inverse_problem.BaseInvProblem(dmis, reg, opt)
 # includes the cooling schedule for the trade-off parameter (beta), stopping
 # criteria for the inversion and saving inversion results at each iteration.
 
-
-# %%
-
 # Defining a starting value for the trade-off parameter (beta) between the data
 # misfit and the regularization.
 
@@ -168,8 +171,9 @@ directives_list = [target_misfit]
 
 # To define the inversion object, we need to define the inversion problem and
 # the set of directives. We can then run the inversion.
-
-# Here we combine the inverse problem and the set of directives
+"""
+Set the regularization parameter here:
+"""
 inv_prob.beta = 1e4
 inv = inversion.BaseInversion(inv_prob, directives_list)
 
@@ -196,31 +200,4 @@ ax[1].set_ylim([-2, 2])
 ax[1].set_title("Wavelet-type " +reg.wavelets.wav)
 
 plt.show()
-
-##
-
-
-##
-
-plt.plot(reg.deriv2(recovered_model,v=recovered_model ))
-plt.show()
-
-
-##
-
-plt.plot(reg.deriv(recovered_model ))
-plt.show()
-##
-eps = 1e-4
-x = np.linspace(-1,1,100)
-ekblom = np.sqrt(x**2 + eps)
-ekblomderiv =x/np.sqrt(x**2 + eps)
-ekblomderiv2 =eps/np.sqrt(x**2 + eps)**3
-
-plt.plot(x, ekblom)
-plt.plot(x, ekblomderiv)
-plt.plot(x, ekblomderiv2)
-plt.show()
-
-##
 
