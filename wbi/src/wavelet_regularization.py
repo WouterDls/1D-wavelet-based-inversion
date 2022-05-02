@@ -1,12 +1,9 @@
-import warnings as wa
+import warnings
 
 import numpy as np
 
-# Install PyWavelets
 import pywt
 
-# Install SimPEG 0.14.0 or higher
-# This all comes with SimPEG > 0.14.0
 from SimPEG import utils
 from SimPEG.regularization import BaseRegularization
 from scipy.sparse import eye
@@ -34,12 +31,10 @@ class WaveletRegularization1D(BaseRegularization):
 
     def __init__(self, mesh, orientation="x", wav="db1", **kwargs):
         """
-        Parameters
-        ----------
-        mesh
-        orientation
-        wav
-        kwargs
+        Regularization for the 1D wavelet transform.
+        :param mesh: SimPEG mesh
+        :param orientation: orientation of the regularization
+        :param wav: wavelet type
         """
         self.orientation = orientation
         self.p = 1  # See Deleersnyder et al., 2021 for details.
@@ -91,11 +86,13 @@ class WaveletRegularization1D(BaseRegularization):
 
         # Do the wavelet transform on each 1D vector in the tensor.
         X = self.wavelets.W @ m.reshape(-1, 1)
-        return np.sum(self.R * np.sqrt(X ** 2 + self.eps))  # the actual measure
+        return np.sum(self.R * np.sqrt(X**2 + self.eps))  # the actual measure
 
     @utils.timeIt
     def deriv(self, m):
         """
+        Derivative of the measure.
+        :param m: model
 
         The regularization in wavelet domain is:
 
@@ -121,7 +118,7 @@ class WaveletRegularization1D(BaseRegularization):
         # Do the wavelet transform
         X = self.wavelets.W @ m.reshape(-1, 1)
         # Generate derivative w.r.t. x
-        deriv_x = self.R * X / np.sqrt(X ** 2 + self.eps)
+        deriv_x = self.R * X / np.sqrt(X**2 + self.eps)
         # Chain rule w.r.t. m
         deriv_m = self.wavelets.W.T @ deriv_x
         return (mD.T * deriv_m).flatten()  # Chain rule w.r.t. SimPEG mapping
@@ -129,16 +126,16 @@ class WaveletRegularization1D(BaseRegularization):
     @utils.timeIt
     def deriv2(self, m, v=None):
         """
-        Second derivative
-
-        The second derivative of the perturbed Ekblom measure is highly unstable for small epsilon. Most methods do not
-        use Hessian information, except for preconditioning (see e.g., optimization -> InexactGaussNewton) . Therefore,
-        the unit matrix is used as Hessian. This results in a more stable optimization routine.
+        Second derivative of the measure.
 
         :param numpy.ndarray m: geophysical model
         :param numpy.ndarray v: vector to multiply
         :rtype: scipy.sparse.csr_matrix
-        :return: WtW, or if v is supplied WtW*v (numpy.ndarray)
+        :return: WtW, or if v is supplied WtW*v (numpy.ndarray)q
+
+        The second derivative of the perturbed Ekblom measure is highly unstable for small epsilon. Most methods do not
+        use Hessian information, except for preconditioning (see e.g., optimization -> InexactGaussNewton) . Therefore,
+        the unit matrix is used as Hessian. This results in a more stable optimization routine.
 
         """
         mD = self.mapping.deriv(m)
@@ -148,6 +145,8 @@ class WaveletRegularization1D(BaseRegularization):
 
     def _generate_scale_dependency_vector(self, wavelet):
         """
+        Generate the scale-dependent-weights for each coefficient in X.
+        :param wavelet: wavelet object
         Wavelet-coefficients corresponding to small-scale effects of the model are penalized more heavily.
         The scaling coefficient is never zero, so no regularization on the scaling coefficients.
         .. math::
@@ -172,8 +171,7 @@ class WaveletRegularization1D(BaseRegularization):
 
     def _regularization_matrix(self):
         """
-
-        :return:
+        Generate the regularization matrix.
         """
         if self.mesh.dim == 1:
             n = 1
@@ -224,7 +222,7 @@ class Wavelet:
 
     @property
     def n_m(self):
-        """ The number of model parameters (in model space) """
+        """The number of model parameters (in model space)"""
         return self._n_m
 
     @n_m.setter
@@ -240,11 +238,12 @@ class Wavelet:
 
     @property
     def wav(self):
-        """Wavelet family to use. See Deleersnyder et al, 2021 for the rationale behind the choice of the optimal wavelet
+        """Wavelet family to use.
+        See Deleersnyder et al, 2021 for the rationale behind the choice of the optimal wavelet.
         In general, Daubechies (db) wavelets are prefered.
-        db1 yields blocky inversion models
-        db2-db4 yield inversion models with sharp interfaces
-        db5+ yield smooth inversion models
+        -  db1 yields blocky inversion models
+        - db2-db4 yield inversion models with sharp interfaces
+        - db5+ yield smooth inversion models
         The discretization of the inversion model also plays a role.
         Changing the discretization may affect the optimal 'choice' for the wavelet.
         """
@@ -254,20 +253,23 @@ class Wavelet:
             return self._wav
 
     @wav.setter
-    def wav(self, type):
-        """ """
-        if type not in pywt.wavelist():
+    def wav(self, type_):
+        """
+        Set the wavelet family to use.
+        :param type_: string
+        """
+        if type_ not in pywt.wavelist():
             raise Exception(
                 "unknown wavelet type, use names from " + str(pywt.wavelist())
             )
         else:
-            self._wav = type
+            self._wav = type_
         if self.W is not None:
             self._update_W()
 
     @property
     def DWTlevel(self):
-        """ The level of decomposition of the discrete wavelet transform"""
+        """The level of decomposition of the discrete wavelet transform"""
         if self._DWTlevel is None:
             raise Exception("The discrete wavelet transform level (DWTlevel) is None")
         else:
@@ -275,12 +277,16 @@ class Wavelet:
 
     @DWTlevel.setter
     def DWTlevel(self, level):
+        """
+        Set the level of decomposition of the discrete wavelet transform
+        :param level: integer
+        """
         maxlevel = pywt.dwt_max_level(self.n_m, self.wav)
         if level is None:
             self._DWTlevel = maxlevel
         else:
             if level > maxlevel:
-                wa.warn(
+                warnings.warn(
                     "Boundary effects: The user-defined DWTlevel exceeds the suggested maximum DWT level of "
                     + str(maxlevel)
                 )
@@ -298,17 +304,24 @@ class Wavelet:
             return self._signal_extension
 
     @signal_extension.setter
-    def signal_extension(self, type):
-        if type is None:
+    def signal_extension(self, type_):
+        """
+        Set the signal extension type
+        :param type_: string
+        """
+        if type_ is None:
             self._signal_extension = "smooth"
-        elif type not in pywt.Modes.modes:
+        elif type_ not in pywt.Modes.modes:
             raise Exception("Typo in signal extension, choose from " + pywt.Modes.modes)
         else:
-            self._signal_extension = type
+            self._signal_extension = type_
         if self.W is not None:
             self._update_W()
 
     def _update_W(self):
+        """
+        Update the wavelet basis function
+        """
         self.W = np.hstack(
             pywt.wavedec(
                 np.eye(self.n_m),
