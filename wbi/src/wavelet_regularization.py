@@ -11,6 +11,8 @@ from SimPEG import utils
 from SimPEG.regularization import BaseRegularization
 from scipy.sparse import eye
 
+__all__ = ["WaveletRegularization1D"]
+
 
 class WaveletRegularization1D(BaseRegularization):
     """
@@ -41,7 +43,9 @@ class WaveletRegularization1D(BaseRegularization):
         """
         self.orientation = orientation
         self.p = 1  # See Deleersnyder et al., 2021 for details.
-        self.eps = 1e-8  # perturbing parameter, default is 1e-8. Should be smaller than 1e-4.
+        self.eps = (
+            1e-8  # perturbing parameter, default is 1e-8. Should be smaller than 1e-4.
+        )
         self.mesh = mesh
         self.mrefInSmooth = False
         assert self.orientation in [
@@ -156,9 +160,15 @@ class WaveletRegularization1D(BaseRegularization):
         # Do wavelet decomposition (=transform)
         coeffs = pywt.wavedec(np.ones(wavelet.n_m), wavelet.wav, level=wavelet.DWTlevel)
         # returns a list of lists with scaling/wavelet coefficients per scale of resolution
-        scale_dependency_vector = np.hstack([2**(j*self.p)*np.ones(c.shape) for j, c in enumerate(coeffs)])
-        scale_dependency_vector[:coeffs[0].size] = 0 # No regularization on scaling coefficients
-        return scale_dependency_vector.reshape(-1, 1)/np.linalg.norm(scale_dependency_vector) # Normalization, only valid vor 1D inversion (as in Deleersnyder et al, 2021)
+        scale_dependency_vector = np.hstack(
+            [2 ** (j * self.p) * np.ones(c.shape) for j, c in enumerate(coeffs)]
+        )
+        scale_dependency_vector[
+            : coeffs[0].size
+        ] = 0  # No regularization on scaling coefficients
+        return scale_dependency_vector.reshape(-1, 1) / np.linalg.norm(
+            scale_dependency_vector
+        )  # Normalization, only valid vor 1D inversion (as in Deleersnyder et al, 2021)
 
     def _regularization_matrix(self):
         """
@@ -168,7 +178,7 @@ class WaveletRegularization1D(BaseRegularization):
         if self.mesh.dim == 1:
             n = 1
         else:
-            raise NotImplementedError('Future release')
+            raise NotImplementedError("Future release")
         scale_dependency_vector = self._generate_scale_dependency_vector(self.wavelets)
         return np.tile(scale_dependency_vector.reshape(-1, 1), (1, n))
 
@@ -209,7 +219,7 @@ class Wavelet:
 
         self._update_W()
         if self.W is None:
-            raise Exception('Init failed')
+            raise Exception("Init failed")
         self.n_x = self.W.shape[0]
 
     @property
@@ -220,7 +230,9 @@ class Wavelet:
     @n_m.setter
     def n_m(self, n):
         if n <= 0:
-            raise Exception('n_m are the number of model parameters, thus strictly positive')
+            raise Exception(
+                "n_m are the number of model parameters, thus strictly positive"
+            )
         else:
             self._n_m = n
         if self.W is not None:
@@ -228,7 +240,7 @@ class Wavelet:
 
     @property
     def wav(self):
-        """ Wavelet family to use. See Deleersnyder et al, 2021 for the rationale behind the choice of the optimal wavelet
+        """Wavelet family to use. See Deleersnyder et al, 2021 for the rationale behind the choice of the optimal wavelet
         In general, Daubechies (db) wavelets are prefered.
         db1 yields blocky inversion models
         db2-db4 yield inversion models with sharp interfaces
@@ -237,7 +249,7 @@ class Wavelet:
         Changing the discretization may affect the optimal 'choice' for the wavelet.
         """
         if self._wav is None:
-            raise Exception('The wavelet basis function is None')
+            raise Exception("The wavelet basis function is None")
         else:
             return self._wav
 
@@ -245,7 +257,9 @@ class Wavelet:
     def wav(self, type):
         """ """
         if type not in pywt.wavelist():
-            raise Exception("unknown wavelet type, use names from " + str(pywt.wavelist()))
+            raise Exception(
+                "unknown wavelet type, use names from " + str(pywt.wavelist())
+            )
         else:
             self._wav = type
         if self.W is not None:
@@ -255,7 +269,7 @@ class Wavelet:
     def DWTlevel(self):
         """ The level of decomposition of the discrete wavelet transform"""
         if self._DWTlevel is None:
-            raise Exception('The discrete wavelet transform level (DWTlevel) is None')
+            raise Exception("The discrete wavelet transform level (DWTlevel) is None")
         else:
             return self._DWTlevel
 
@@ -276,10 +290,10 @@ class Wavelet:
 
     @property
     def signal_extension(self):
-        """ Due to the cascading filter banks algorithm, an extrapolation method is required. Choose the method which
-        introduces the least artifacts. In general, "smooth" is a good choice. """
+        """Due to the cascading filter banks algorithm, an extrapolation method is required. Choose the method which
+        introduces the least artifacts. In general, "smooth" is a good choice."""
         if self._signal_extension is None:
-            raise Exception('The signal extension type is None')
+            raise Exception("The signal extension type is None")
         else:
             return self._signal_extension
 
@@ -296,5 +310,11 @@ class Wavelet:
 
     def _update_W(self):
         self.W = np.hstack(
-            pywt.wavedec(np.eye(self.n_m), self.wav, level=self.DWTlevel, mode=self.signal_extension, axis=1)
+            pywt.wavedec(
+                np.eye(self.n_m),
+                self.wav,
+                level=self.DWTlevel,
+                mode=self.signal_extension,
+                axis=1,
+            )
         ).T

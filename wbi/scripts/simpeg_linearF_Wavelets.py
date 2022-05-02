@@ -143,7 +143,7 @@ Play here with the wav-parameter
 - db2, db3, db4 = rather sharp
 - db5+ = rather smooth
 """
-reg = regularization.WaveletRegularization1D(mesh, wav='db3')
+reg = regularization.WaveletRegularization1D(mesh, wav="db3")
 
 # Define how the optimization problem is solved.
 opt = optimization.InexactGaussNewton(maxIter=100, maxIterLS=20)
@@ -178,7 +178,7 @@ inv_prob.beta = 1e4
 inv = inversion.BaseInversion(inv_prob, directives_list)
 
 # Starting model
-starting_model = np.random.rand(nParam)*0.1
+starting_model = np.random.rand(nParam) * 0.1
 
 # Run inversion
 recovered_model = inv.run(starting_model)
@@ -197,7 +197,6 @@ ax[1].plot(mesh.vectorCCx, true_model, "b-")
 ax[1].plot(mesh.vectorCCx, recovered_model, "r-")
 ax[1].legend(("True Model", "Recovered Model"))
 ax[1].set_ylim([-2, 2])
-ax[1].set_title("Wavelet-type " +reg.wavelets.wav)
+ax[1].set_title("Wavelet-type " + reg.wavelets.wav)
 
 plt.show()
-

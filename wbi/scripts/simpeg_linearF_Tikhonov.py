@@ -196,4 +196,3 @@ ax[1].set_ylim([-2, 2])
 plt.show()
 
 ##
-
