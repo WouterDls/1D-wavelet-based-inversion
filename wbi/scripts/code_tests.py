@@ -5,7 +5,7 @@ import numpy as np
 from discretize import TensorMesh
 from discretize.utils import random_model
 
-from wib.src import wavelet_regularization as regularization
+from wbi import wavelet_regularization as regularization
 
 # %%
 

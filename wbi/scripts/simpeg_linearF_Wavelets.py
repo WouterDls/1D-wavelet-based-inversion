@@ -28,7 +28,7 @@ from SimPEG import (
     inversion,
 )
 from discretize import TensorMesh
-from wib.src import wavelet_regularization as regularization
+from wbi import wavelet_regularization as regularization
 
 ## Defining the Model and Mapping
 
