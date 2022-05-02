@@ -14,7 +14,6 @@ Example from SimPEG
 #     - Defining the inverse problem (data misfit, regularization, optimization)
 #     - Specifying directives for the inversion
 #     - Recovering a set of model parameters which explains the observations
-import importlib
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -28,6 +27,7 @@ from SimPEG import (
     inversion,
 )
 from discretize import TensorMesh
+
 from wbi import wavelet_regularization as regularization
 
 ## Defining the Model and Mapping
