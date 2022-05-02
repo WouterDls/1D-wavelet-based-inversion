@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+wib/scripts/.DS_Store
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/wavelet-based-inversion.iml
+wib/src/.DS_Store
+.DS_Store
