@@ -1,9 +1,3 @@
-"""
-Example from SimPEG
-
-"""
-
-
 # Linear Least-Squares Inversion
 
 # Here we demonstrate the basics of inverting data with SimPEG by considering a
@@ -14,7 +8,7 @@ Example from SimPEG
 #     - Defining the inverse problem (data misfit, regularization, optimization)
 #     - Specifying directives for the inversion
 #     - Recovering a set of model parameters which explains the observations
-import importlib
+
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -24,15 +18,15 @@ from SimPEG import (
     data_misfit,
     directives,
     optimization,
+    regularization,
     inverse_problem,
     inversion,
 )
 from discretize import TensorMesh
-from wib.src import wavelet_regularization as regularization
 
 ## Defining the Model and Mapping
 
-# Here we generate a synthetic model and a mappig which goes from the model
+# Here we generate a synthetic model and a mapping which goes from the model
 # space to the row space of our linear operator.
 
 # %%
@@ -57,15 +51,11 @@ ax = fig.add_subplot(111)
 ax.plot(mesh.vectorCCx, true_model, "b-")
 ax.set_ylim([-2, 2])
 
-# %% md
-
 ## Defining the Linear Operator
 
 # Here we define the linear operator with dimensions (nData, nParam). In practive,
 # you may have a problem-specific linear operator which you would like to construct
 # or load here.
-
-# %%
 
 # Number of data observations (rows)
 nData = 20
@@ -95,18 +85,14 @@ for i in range(G.shape[0]):
     ax.plot(G[i, :])
 
 ax.set_title("Columns of matrix G")
+plt.show()
 
 # Defining the Simulation
 
 # The simulation defines the relationship between the model parameters and
 # predicted data.
 
-
-# %%
-
 sim = simulation.LinearSimulation(mesh, G=G, model_map=model_map)
-
-# %% md
 
 ## Predict Synthetic Data
 
@@ -129,28 +115,20 @@ data_obj = sim.make_synthetic_data(true_model, relative_error=std, add_noise=Tru
 #     3) Optimization: the numerical approach used to solve the inverse problem
 #
 
-# %%
-
 # Define the data misfit. Here the data misfit is the L2 norm of the weighted
 # residual between the observed data and the data predicted for a given model.
 # Within the data misfit, the residual between predicted and observed data are
 # normalized by the data's standard deviation.
 dmis = data_misfit.L2DataMisfit(simulation=sim, data=data_obj)
+
 # Define the regularization (model objective function).
-"""
-Play here with the wav-parameter
-- db1 = blocky
-- db2, db3, db4 = rather sharp
-- db5+ = rather smooth
-"""
-reg = regularization.WaveletRegularization1D(mesh, wav='db3')
+reg = regularization.Tikhonov(mesh, alpha_s=1.0, alpha_x=1.0)
 
 # Define how the optimization problem is solved.
-opt = optimization.InexactGaussNewton(maxIter=100, maxIterLS=20)
+opt = optimization.InexactGaussNewton(maxIter=50)
 
 # Here we define the inverse problem that is to be solved
 inv_prob = inverse_problem.BaseInvProblem(dmis, reg, opt)
-# %% md
 
 ## Define Inversion Directives
 
@@ -160,32 +138,31 @@ inv_prob = inverse_problem.BaseInvProblem(dmis, reg, opt)
 
 # Defining a starting value for the trade-off parameter (beta) between the data
 # misfit and the regularization.
+starting_beta = directives.BetaEstimate_ByEig(beta0_ratio=1e-4)
 
 # Setting a stopping criteria for the inversion.
 target_misfit = directives.TargetMisfit()
 
 # The directives are defined as a list.
-directives_list = [target_misfit]
+directives_list = [starting_beta, target_misfit]
 
 ## Setting a Starting Model and Running the Inversion
 
 # To define the inversion object, we need to define the inversion problem and
 # the set of directives. We can then run the inversion.
-"""
-Set the regularization parameter here:
-"""
-inv_prob.beta = 1e4
+
+# Here we combine the inverse problem and the set of directives
 inv = inversion.BaseInversion(inv_prob, directives_list)
 
 # Starting model
-starting_model = np.random.rand(nParam)*0.1
+starting_model = np.zeros(nParam)
 
 # Run inversion
 recovered_model = inv.run(starting_model)
 
-# Plotting Results
+## Plotting Results
 
-##
+# %%
 # Observed versus predicted data
 fig, ax = plt.subplots(1, 2, figsize=(12 * 1.2, 4 * 1.2))
 ax[0].plot(data_obj.dobs, "b-")
@@ -197,7 +174,5 @@ ax[1].plot(mesh.vectorCCx, true_model, "b-")
 ax[1].plot(mesh.vectorCCx, recovered_model, "r-")
 ax[1].legend(("True Model", "Recovered Model"))
 ax[1].set_ylim([-2, 2])
-ax[1].set_title("Wavelet-type " +reg.wavelets.wav)
 
 plt.show()
-
