@@ -13,20 +13,21 @@ __all__ = ["WaveletRegularization1D"]
 
 class WaveletRegularization1D(BaseRegularization):
     """
-    Base Simple Smooth Regularization. This base class regularizes on the first
-    spatial derivative, not considering length scales, in the provided
-    orientation
+    Wavelet-based Regularization.
+    This class regularizes the inverse problem by minimizing the complexity in the wavelet domain via a sparsity constraint (see Deleersnyder et al., 2021).
+
+    This class fits within the modular SimPEG framework. For more information, see
+    - https://simpeg.xyz/
+    - Cockett, R., Kang, S., Heagy, L. J., Pidlisecky, A., & Oldenburg, D. W. (2015). SimPEG: An open source framework for simulation and gradient based parameter estimation in geophysical applications. Computers & Geosciences, 85, 142-154.
+
 
     **Optional Inputs**
 
     :param discretize.base.BaseMesh mesh: SimPEG mesh
     :param int nP: number of parameters
     :param IdentityMap mapping: regularization mapping, takes the model from model space to the space you want to regularize in
-    :param numpy.ndarray mref: reference model
+    :param numpy.ndarray mref: reference model - our method does not support reference models
     :param numpy.ndarray indActive: active cell indices for reducing the size of differential operators in the definition of a regularization mesh
-    :param numpy.ndarray cell_weights: cell weights
-    :param bool mrefInSmooth: include the reference model in the smoothness computation? (eg. look at Deriv of m (False) or Deriv of (m-mref) (True))
-    :param numpy.ndarray cell_weights: vector of cell weights (applied in all terms)
     """
 
     def __init__(self, mesh, orientation="x", wav="db1", **kwargs):
@@ -34,12 +35,12 @@ class WaveletRegularization1D(BaseRegularization):
         Regularization for the 1D wavelet transform.
         :param mesh: SimPEG mesh
         :param orientation: orientation of the regularization
-        :param wav: wavelet type
+        :param wav: wavelet type (default db1, which is blocky)
         """
         self.orientation = orientation
-        self.p = 1  # See Deleersnyder et al., 2021 for details.
+        self.p = 1      # See Deleersnyder et al., 2021 for details.
         self.eps = (
-            1e-8  # perturbing parameter, default is 1e-8. Should be smaller than 1e-4.
+            1e-6  # perturbing parameter, default is 1e-6. Should be smaller than 1e-4.
         )
         self.mesh = mesh
         self.mrefInSmooth = False
@@ -80,11 +81,11 @@ class WaveletRegularization1D(BaseRegularization):
 
         .. math::
 
-            r(m) =  \sqrt{m^TW^TWm + \epsilon}
+            r(m) =  \sum_{i,j} R_{ij}\sqrt{ \left(X_{ij}\right)^2 + \epsilon}
 
         """
 
-        # Do the wavelet transform on each 1D vector in the tensor.
+        # Do the wavelet transform on each 1D snippet
         X = self.wavelets.W @ m.reshape(-1, 1)
         return np.sum(self.R * np.sqrt(X**2 + self.eps))  # the actual measure
 
@@ -171,7 +172,7 @@ class WaveletRegularization1D(BaseRegularization):
 
     def _regularization_matrix(self):
         """
-        Generate the regularization matrix.
+        Generate the regularization matrix. This maps the scale-dependency on each element in the wavelet domain matrix X.
         """
         if self.mesh.dim == 1:
             n = 1
