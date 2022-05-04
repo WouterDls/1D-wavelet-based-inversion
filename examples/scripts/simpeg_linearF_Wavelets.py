@@ -1,9 +1,3 @@
-"""
-Example from SimPEG
-
-"""
-
-
 # Linear Least-Squares Inversion
 
 # Here we demonstrate the basics of inverting data with SimPEG by considering a
@@ -35,8 +29,6 @@ from wbi import wavelet_regularization as regularization
 # Here we generate a synthetic model and a mappig which goes from the model
 # space to the row space of our linear operator.
 
-# %%
-
 nParam = 100  # Number of model parameters
 
 # A 1D mesh is used to define the row-space of the linear operator.
@@ -56,16 +48,13 @@ fig = plt.figure(figsize=(8, 5))
 ax = fig.add_subplot(111)
 ax.plot(mesh.vectorCCx, true_model, "b-")
 ax.set_ylim([-2, 2])
-
-# %% md
+plt.show()
 
 ## Defining the Linear Operator
 
 # Here we define the linear operator with dimensions (nData, nParam). In practive,
 # you may have a problem-specific linear operator which you would like to construct
 # or load here.
-
-# %%
 
 # Number of data observations (rows)
 nData = 20
@@ -101,12 +90,8 @@ ax.set_title("Columns of matrix G")
 # The simulation defines the relationship between the model parameters and
 # predicted data.
 
-
-# %%
-
 sim = simulation.LinearSimulation(mesh, G=G, model_map=model_map)
 
-# %% md
 
 ## Predict Synthetic Data
 
@@ -129,20 +114,20 @@ data_obj = sim.make_synthetic_data(true_model, relative_error=std, add_noise=Tru
 #     3) Optimization: the numerical approach used to solve the inverse problem
 #
 
-# %%
-
 # Define the data misfit. Here the data misfit is the L2 norm of the weighted
 # residual between the observed data and the data predicted for a given model.
 # Within the data misfit, the residual between predicted and observed data are
 # normalized by the data's standard deviation.
+
 dmis = data_misfit.L2DataMisfit(simulation=sim, data=data_obj)
+
 # Define the regularization (model objective function).
-"""
-Play here with the wav-parameter
-- db1 = blocky
-- db2, db3, db4 = rather sharp
-- db5+ = rather smooth
-"""
+
+# Play here with the wav-parameter
+# - db1 = blocky
+# - db2, db3, db4 = rather sharp
+# - db5+ = rather smooth
+
 reg = regularization.WaveletRegularization1D(mesh, wav="db3")
 
 # Define how the optimization problem is solved.
@@ -150,7 +135,7 @@ opt = optimization.InexactGaussNewton(maxIter=100, maxIterLS=20)
 
 # Here we define the inverse problem that is to be solved
 inv_prob = inverse_problem.BaseInvProblem(dmis, reg, opt)
-# %% md
+
 
 ## Define Inversion Directives
 
@@ -171,9 +156,8 @@ directives_list = [target_misfit]
 
 # To define the inversion object, we need to define the inversion problem and
 # the set of directives. We can then run the inversion.
-"""
-Set the regularization parameter here:
-"""
+
+# Set the regularization parameter here:
 inv_prob.beta = 1e4
 inv = inversion.BaseInversion(inv_prob, directives_list)
 
@@ -185,7 +169,6 @@ recovered_model = inv.run(starting_model)
 
 # Plotting Results
 
-##
 # Observed versus predicted data
 fig, ax = plt.subplots(1, 2, figsize=(12 * 1.2, 4 * 1.2))
 ax[0].plot(data_obj.dobs, "b-")

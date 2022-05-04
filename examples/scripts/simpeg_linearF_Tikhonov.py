@@ -1,6 +1,3 @@
-# @ Robin: Set beta (=regu paramter) equal to zero and see that this is basically a non-example!
-# This example doesn't need regularization!
-
 # Linear Least-Squares Inversion
 
 # Here we demonstrate the basics of inverting data with SimPEG by considering a
@@ -29,7 +26,7 @@ from discretize import TensorMesh
 
 ## Defining the Model and Mapping
 
-# Here we generate a synthetic model and a mappig which goes from the model
+# Here we generate a synthetic model and a mapping which goes from the model
 # space to the row space of our linear operator.
 
 # %%
@@ -54,15 +51,11 @@ ax = fig.add_subplot(111)
 ax.plot(mesh.vectorCCx, true_model, "b-")
 ax.set_ylim([-2, 2])
 
-# %% md
-
 ## Defining the Linear Operator
 
 # Here we define the linear operator with dimensions (nData, nParam). In practive,
 # you may have a problem-specific linear operator which you would like to construct
 # or load here.
-
-# %%
 
 # Number of data observations (rows)
 nData = 20
@@ -92,18 +85,14 @@ for i in range(G.shape[0]):
     ax.plot(G[i, :])
 
 ax.set_title("Columns of matrix G")
+plt.show()
 
 # Defining the Simulation
 
 # The simulation defines the relationship between the model parameters and
 # predicted data.
 
-
-# %%
-
 sim = simulation.LinearSimulation(mesh, G=G, model_map=model_map)
-
-# %% md
 
 ## Predict Synthetic Data
 
@@ -126,8 +115,6 @@ data_obj = sim.make_synthetic_data(true_model, relative_error=std, add_noise=Tru
 #     3) Optimization: the numerical approach used to solve the inverse problem
 #
 
-# %%
-
 # Define the data misfit. Here the data misfit is the L2 norm of the weighted
 # residual between the observed data and the data predicted for a given model.
 # Within the data misfit, the residual between predicted and observed data are
@@ -143,16 +130,11 @@ opt = optimization.InexactGaussNewton(maxIter=50)
 # Here we define the inverse problem that is to be solved
 inv_prob = inverse_problem.BaseInvProblem(dmis, reg, opt)
 
-# %% md
-
 ## Define Inversion Directives
 
 # Here we define any directiveas that are carried out during the inversion. This
 # includes the cooling schedule for the trade-off parameter (beta), stopping
 # criteria for the inversion and saving inversion results at each iteration.
-
-
-# %%
 
 # Defining a starting value for the trade-off parameter (beta) between the data
 # misfit and the regularization.
@@ -194,5 +176,3 @@ ax[1].legend(("True Model", "Recovered Model"))
 ax[1].set_ylim([-2, 2])
 
 plt.show()
-
-##
