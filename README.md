@@ -1,9 +1,18 @@
 # wavelet-based-inversion
 Scale-dependent wavelet-based regularization scheme for geophysical 1D  inversion
 
+![Ensemble of inversion models](https://github.com/WouterDls/1D-wavelet-based-inversion/blob/main/Ensemble.png)
+
+*This flexible inversion scheme allows to easil obtain blocky, smooth and intermediate inversion models. 
+Different inversion models are obtained by simply changing the wavelet basis.*
+- db1: blocky inversion models
+- db2-db4: sharper inversion models
+- db5+: smoother inversion models 
+
+Daubechies (db) wavelets are ideal (see Deleersnyder et al, 2021), however, other wavelets can also be used. Simply run pywt.wavelist() to list the available options. The shape of the wavelet basis function (e.g., look [here](http://wavelets.pybytes.com/)) is an indication of the type of minimum-structure the regularization method will promote.
 ### Easy to use
-- Fits within the modular SimPEG framework (see https://simpeg.xyz/) (see examples)
-- Fits wihtin your own inversion codes (see examples with empymod)
+- Fits within the modular SimPEG framework (see [SimPEG website](https://simpeg.xyz/)) (see examples)
+- Fits wihtin your own inversion codes (see examples with [empymod](https://empymod.emsig.xyz/en/stable/))
 
 ### How to cite
 **The method:**
