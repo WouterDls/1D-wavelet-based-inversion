@@ -52,7 +52,9 @@ def test_wavelet_regularization_1d():
     std = 0.01
     np.random.seed(1)
 
-    data_obj = sim.make_synthetic_data(true_model, relative_error=std, add_noise=True)  # noqa
+    data_obj = sim.make_synthetic_data(
+        true_model, relative_error=std, add_noise=True
+    )  # noqa
 
     dmis = data_misfit.L2DataMisfit(simulation=sim, data=data_obj)
 
@@ -79,5 +81,3 @@ def test_wavelet_regularization_1d():
 
     # Check that the recovered model is close to the reference model
     assert np.allclose(recovered_model, ref_model, atol=0.1)
-
-

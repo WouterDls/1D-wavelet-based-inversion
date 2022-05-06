@@ -92,6 +92,7 @@ class WaveletRegularization1D(BaseRegularization):
     def deriv(self, m):
         """
         Derivative of the measure.
+
         :param m: model
 
         The regularization in wavelet domain is:
@@ -100,7 +101,7 @@ class WaveletRegularization1D(BaseRegularization):
 
             R(x) =  \sum_j \sqrt{x_j^2 + \epsilon}
 
-        So the derivative is straight forward:
+        So the derivative is straightforward:
 
         .. math::
 
@@ -146,15 +147,15 @@ class WaveletRegularization1D(BaseRegularization):
     def _generate_scale_dependency_vector(self, wavelet):
         """
         Generate the scale-dependent-weights for each coefficient in X.
-        :param wavelet: wavelet object
-        Wavelet-coefficients corresponding to small-scale effects of the model are penalized more heavily.
-        The scaling coefficient is never zero, so no regularization on the scaling coefficients.
-        .. math::
-            x = [v_{0,0}, w_{0,0}, w_{1,0},w_{1,1}, w_{2,1},w_{2,1}, \cdots, w_{n,k}, \cdots ]
 
-            \phi_m(x) =  \frac{1}{E} \sum_{n}^{N} 2^n\sum_k \mu(w_n,k)
+        :param wavelet: wavelet object
+            Wavelet-coefficients corresponding to small-scale effects of the model are penalized more heavily.
+            The scaling coefficient is never zero, so no regularization on the scaling coefficients.
+            .. math::
+             x = [v_{0,0}, w_{0,0}, w_{1,0},w_{1,1}, w_{2,1},w_{2,1}, \cdots, w_{n,k}, \cdots ]
+
+             \phi_m(x) =  \frac{1}{E} \sum_{n}^{N} 2^n\sum_k \mu(w_n,k)
         :param wavelet:contains info about the specific wavelet-transform
-        :return:
         """
         # Do wavelet decomposition (=transform)
         coeffs = pywt.wavedec(np.ones(wavelet.n_m), wavelet.wav, level=wavelet.DWTlevel)
