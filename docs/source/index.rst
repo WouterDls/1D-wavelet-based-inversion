@@ -18,3 +18,24 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
+Contents
+-----------------
+
+.. toctree::
+   :maxdepth: 2
+
+   source/modules.rst
+
+Wavelet Based Inversion
+----------------------------
+Introduction
+.............
+
+Contributing
+=============
+Contributors and feedback from users are welcome. Don't hesitate to submit an issue or a PR, or request a new feature.
+
+References
+=============
