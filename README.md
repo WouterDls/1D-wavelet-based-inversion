@@ -1,4 +1,6 @@
 [![DOI](https://zenodo.org/badge/487773353.svg)](https://zenodo.org/badge/latestdoi/487773353)
+[![Documentation Status](https://readthedocs.org/projects/1d-wavelet-based-inversion/badge/?version=latest)](https://1d-wavelet-based-inversion.readthedocs.io/en/latest/?badge=latest)
+
 
 # wavelet-based-inversion
 Scale-dependent wavelet-based regularization scheme for geophysical 1D  inversion
@@ -15,6 +17,10 @@ Daubechies (db) wavelets are ideal (see Deleersnyder et al, 2021), however, othe
 ### Easy to use
 - Fits within the modular SimPEG framework (see [SimPEG website](https://simpeg.xyz/)) (see examples)
 - Fits within your own inversion codes (see examples with [empymod](https://empymod.emsig.xyz/en/stable/))
+
+#### Documentation
+
+https://1d-wavelet-based-inversion.readthedocs.io/en/latest/
 
 ### How to cite
 **The method:**
