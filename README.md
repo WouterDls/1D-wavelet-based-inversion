@@ -12,7 +12,7 @@ Different inversion models are obtained by simply changing the wavelet basis.*
 Daubechies (db) wavelets are ideal (see Deleersnyder et al, 2021), however, other wavelets can also be used. Simply run pywt.wavelist() to list the available options. The shape of the wavelet basis function (e.g., look [here](http://wavelets.pybytes.com/)) is an indication of the type of minimum-structure the regularization method will promote.
 ### Easy to use
 - Fits within the modular SimPEG framework (see [SimPEG website](https://simpeg.xyz/)) (see examples)
-- Fits wihtin your own inversion codes (see examples with [empymod](https://empymod.emsig.xyz/en/stable/))
+- Fits within your own inversion codes (see examples with [empymod](https://empymod.emsig.xyz/en/stable/))
 
 ### How to cite
 **The method:**
