@@ -24,7 +24,9 @@ Deleersnyder, W., Maveau, B., Hermans, T., & Dudal, D. (2021). Inversion of elec
 Open Access version on [ResearchGate](https://www.researchgate.net/publication/351407378_Inversion_of_electromagnetic_induction_data_using_a_novel_wavelet-based_and_scale-dependent_regularization_term)
 
 **The code:**
-Deleersnyder, W., Thibaut, R., 2022. WBI - Scale-dependent 1D wavelet-based inversion in Python, DOI: 10.5281/zenodo.6552695
+
+Wouter Deleersnyder, & Robin Thibaut. (2022). WouterDls/1D-wavelet-based-inversion: Wavelet-Based Inversion (0.1.0). Zenodo. https://doi.org/10.5281/zenodo.6552695
+
 ### Questions?
 Contact us on GitHub!
 - [Wouter Deleersnyder](https://github.com/WouterDls)
