@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 my_pckg = find_packages(include=["wbi"])
-with open("README.rst") as f:
+with open("README.md") as f:
     LONG_DESCRIPTION = f.read()
 setup(
     name="wbi",
