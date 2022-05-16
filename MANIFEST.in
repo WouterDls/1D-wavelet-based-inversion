@@ -1,0 +1,6 @@
+include wbi/testing/*
+include wbi/wavelet_regularization/*
+include examples/notebooks/*
+include examples/scripts/*
+
+include docs/examples/*
