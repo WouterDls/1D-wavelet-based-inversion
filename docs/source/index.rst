@@ -31,6 +31,7 @@ Contents
 
 Wavelet Based Inversion
 ----------------------------
+
 Introduction
 .............
 
