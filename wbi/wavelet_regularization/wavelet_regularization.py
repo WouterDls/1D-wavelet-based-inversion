@@ -76,7 +76,7 @@ class WaveletRegularization1D(BaseRegularization):
 
     @utils.timeIt
     def __call__(self, m):
-        """
+        r"""
         We use a $\ell_1$ perturbed Ekblom measure as differentiable sparsity measure.
 
         .. math::
@@ -91,7 +91,7 @@ class WaveletRegularization1D(BaseRegularization):
 
     @utils.timeIt
     def deriv(self, m):
-        """
+        r"""
         Derivative of the measure.
 
         :param m: model
@@ -127,7 +127,7 @@ class WaveletRegularization1D(BaseRegularization):
 
     @utils.timeIt
     def deriv2(self, m, v=None):
-        """
+        r"""
         Second derivative of the measure.
 
         :param numpy.ndarray m: geophysical model
@@ -146,7 +146,7 @@ class WaveletRegularization1D(BaseRegularization):
         return mD.T * v
 
     def _generate_scale_dependency_vector(self, wavelet):
-        """
+        r"""
         Generate the scale-dependent-weights for each coefficient in X.
 
         :param wavelet: wavelet object
@@ -174,7 +174,7 @@ class WaveletRegularization1D(BaseRegularization):
         )  # Normalization, only valid vor 1D inversion (as in Deleersnyder et al, 2021)
 
     def _regularization_matrix(self):
-        """
+        r"""
         Generate the regularization matrix. This maps the scale-dependency on each element in the wavelet domain matrix X.
         """
         if self.mesh.dim == 1:
@@ -186,7 +186,7 @@ class WaveletRegularization1D(BaseRegularization):
 
 
 class Wavelet:
-    """
+    r"""
     The object containing all specific functionalities for a wavelet type.
 
     Parameters
@@ -242,7 +242,7 @@ class Wavelet:
 
     @property
     def wav(self):
-        """Wavelet family to use.
+        r"""Wavelet family to use.
         See Deleersnyder et al, 2021 for the rationale behind the choice of the optimal wavelet.
         In general, Daubechies (db) wavelets are prefered.
         -  db1 yields blocky inversion models
@@ -258,7 +258,7 @@ class Wavelet:
 
     @wav.setter
     def wav(self, type_):
-        """
+        r"""
         Set the wavelet family to use.
         :param type_: string
         """
