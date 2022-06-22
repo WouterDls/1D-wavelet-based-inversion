@@ -11,11 +11,13 @@ Welcome to wabi's documentation!
    :caption: Contents:
 
 
+
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
+* :ref:`search`
 
 Installation
 ------------
@@ -30,8 +32,8 @@ Contents
 .. toctree::
    :maxdepth: 2
 
-   source/modules.rst
-   source/examples.rst
+   wbi.wavelet_regularization.rst
+   examples.rst
 
 wavelet-based-inversion
 ==================
