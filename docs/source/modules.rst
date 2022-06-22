@@ -1,5 +1,5 @@
-wabi
-===
+wabi modules
+==========================
 
 .. toctree::
    :maxdepth: 4
