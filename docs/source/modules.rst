@@ -1,7 +1,7 @@
-wbi
+wabi
 ===
 
 .. toctree::
    :maxdepth: 4
 
-   wbi
+   wbi.wavelet_regularization
