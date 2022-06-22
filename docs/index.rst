@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to wabi's documentation!
-===============================
+=========================================================
 
 .. toctree::
    :maxdepth: 2
@@ -36,7 +36,7 @@ Contents
    examples.rst
 
 wavelet-based-inversion
-==================
+==========================================
 
 Scale-dependent wavelet-based regularization scheme for geophysical 1D  inversion.
 
