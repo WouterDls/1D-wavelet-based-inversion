@@ -3,8 +3,8 @@ my_pckg = find_packages(include=["wbi"])
 with open("README.md") as f:
     LONG_DESCRIPTION = f.read()
 setup(
-    name="wbi",
-    version="0.1.0",
+    name="wabi",
+    version="0.1.1",
     packages=my_pckg,
     include_package_data=True,
     url="https://github.com/WouterDls/1D-wavelet-based-inversion",

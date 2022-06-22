@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to wbi's documentation!
+Welcome to wabi's documentation!
 ===============================
 
 .. toctree::
@@ -22,7 +22,7 @@ Indices and tables
 Installation
 ------------
 
-WBI is available through `PyPI <https://pypi.org/project/wbi/>`_, and may be installed using ``pip``: ::
+WBI is available through `PyPI <https://pypi.org/project/wabi/>`_, and may be installed using ``pip``: ::
 
    $ pip install wbi
 

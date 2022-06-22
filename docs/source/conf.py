@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'wbi'
+project = 'wabi'
 copyright = '2022, Wouter Deleersnyder, Robin Thibaut'
 author = 'Wouter Deleersnyder, Robin Thibaut'
 
