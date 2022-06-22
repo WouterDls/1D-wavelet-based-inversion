@@ -22,9 +22,9 @@ Indices and tables
 Installation
 ------------
 
-WBI is available through `PyPI <https://pypi.org/project/wabi/>`_, and may be installed using ``pip``: ::
+WABI is available through `PyPI <https://pypi.org/project/wabi/>`_, and may be installed using ``pip``: ::
 
-   $ pip install wbi
+   $ pip install wabi
 
 Contents
 -----------------

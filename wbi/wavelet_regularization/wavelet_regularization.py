@@ -38,7 +38,7 @@ class WaveletRegularization1D(BaseRegularization):
         :param wav: wavelet type (default db1, which is blocky)
         """
         self.orientation = orientation
-        self.p = 1      # See Deleersnyder et al., 2021 for details.
+        self.p = 1  # See Deleersnyder et al., 2021 for details.
         self.eps = (
             1e-6  # perturbing parameter, default is 1e-6. Should be smaller than 1e-4.
         )
@@ -87,7 +87,7 @@ class WaveletRegularization1D(BaseRegularization):
 
         # Do the wavelet transform on each 1D snippet
         X = self.wavelets.W @ m.reshape(-1, 1)
-        return np.sum(self.R * np.sqrt(X**2 + self.eps))  # the actual measure
+        return np.sum(self.R * np.sqrt(X ** 2 + self.eps))  # the actual measure
 
     @utils.timeIt
     def deriv(self, m):
@@ -120,7 +120,7 @@ class WaveletRegularization1D(BaseRegularization):
         # Do the wavelet transform
         X = self.wavelets.W @ m.reshape(-1, 1)
         # Generate derivative w.r.t. x
-        deriv_x = self.R * X / np.sqrt(X**2 + self.eps)
+        deriv_x = self.R * X / np.sqrt(X ** 2 + self.eps)
         # Chain rule w.r.t. m
         deriv_m = self.wavelets.W.T @ deriv_x
         return (mD.T * deriv_m).flatten()  # Chain rule w.r.t. SimPEG mapping
