@@ -32,7 +32,7 @@ Contents
 .. toctree::
    :maxdepth: 2
 
-   modules.rst
+   wbi.wavelet_regularization.rst
    examples.rst
 
 wavelet-based-inversion
