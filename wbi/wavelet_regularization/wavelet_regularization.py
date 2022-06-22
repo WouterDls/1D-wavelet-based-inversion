@@ -152,10 +152,12 @@ class WaveletRegularization1D(BaseRegularization):
         :param wavelet: wavelet object
             Wavelet-coefficients corresponding to small-scale effects of the model are penalized more heavily.
             The scaling coefficient is never zero, so no regularization on the scaling coefficients.
-            .. math::
-             x = [v_{0,0}, w_{0,0}, w_{1,0},w_{1,1}, w_{2,1},w_{2,1}, \cdots, w_{n,k}, \cdots ]
 
-             \phi_m(x) =  \frac{1}{E} \sum_{n}^{N} 2^n\sum_k \mu(w_n,k)
+            .. math::
+
+                x = [v_{0,0}, w_{0,0}, w_{1,0},w_{1,1}, w_{2,1},w_{2,1}, \cdots, w_{n,k}, \cdots ]
+                \phi_m(x) =  \frac{1}{E} \sum_{n}^{N} 2^n\sum_k \mu(w_n,k)
+
         :param wavelet:contains info about the specific wavelet-transform
         """
         # Do wavelet decomposition (=transform)
@@ -165,7 +167,7 @@ class WaveletRegularization1D(BaseRegularization):
             [2 ** (j * self.p) * np.ones(c.shape) for j, c in enumerate(coeffs)]
         )
         scale_dependency_vector[
-            : coeffs[0].size
+        : coeffs[0].size
         ] = 0  # No regularization on scaling coefficients
         return scale_dependency_vector.reshape(-1, 1) / np.linalg.norm(
             scale_dependency_vector
