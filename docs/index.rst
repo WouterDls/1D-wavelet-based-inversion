@@ -52,7 +52,10 @@ Open Access version on `ResearchGate <https://www.researchgate.net/publication/3
 The code
 --------
 Deleersnyder, W., Thibaut, R., 2022. WBI - Scale-dependent 1D wavelet-based inversion in Python
+
 Questions?
+
 Contact us on GitHub!
+
 - `Wouter Deleersnyder <https://github.com/WouterDls>`_
 - `Robin Thibaut <https://github.com/RobinThibaut>`_
