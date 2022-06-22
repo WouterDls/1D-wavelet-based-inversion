@@ -32,8 +32,8 @@ Contents
 .. toctree::
    :maxdepth: 2
 
-   modules.rst
-   examples.rst
+   source/modules.rst
+   source/examples.rst
 
 wavelet-based-inversion
 ==================

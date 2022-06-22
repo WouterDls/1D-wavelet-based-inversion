@@ -1,7 +1,7 @@
-wabi modules
-==========================
+wbi
+===
 
 .. toctree::
    :maxdepth: 4
 
-   wbi.wavelet_regularization.rst
+   wbi
