@@ -1,10 +1,10 @@
-wbi.testing package
+Testing WABI
 ===================
 
 Submodules
 ----------
 
-wbi.testing.tests module
+Tests module
 ------------------------
 
 .. automodule:: wbi.testing.tests
