@@ -1,4 +1,4 @@
-wbi
+wabi
 ===
 
 .. toctree::

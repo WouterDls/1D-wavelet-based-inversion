@@ -1,4 +1,4 @@
-wbi package
+wabi package
 ===========
 
 Subpackages
