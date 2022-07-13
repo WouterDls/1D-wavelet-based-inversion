@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8a38fbb-cd14-4cef-8b66-39d44c9fc80c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/examples/scripts/example_empymod.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/notebooks/Code tests.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/notebooks/simpeg_linearF_Tikhonov.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/notebooks/simpeg_linearF_Tikhonov.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/notebooks/simpeg_linearF_wavelets_1D.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/notebooks/simpeg_linearF_wavelets_1D.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/scripts/simpeg_linearF_Tikhonov.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/scripts/simpeg_linearF_Tikhonov.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/scripts/simpeg_linearF_Wavelets.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/scripts/simpeg_linearF_Wavelets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/simpeg_linearF_wavelets_1D.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/simpeg_linearF_wavelets_1D.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/scripts/simpeg_linearF_Tikhonov.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/scripts/simpeg_linearF_Tikhonov.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/scripts/simpeg_linearF_Wavelets.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/scripts/simpeg_linearF_Wavelets.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,11 +36,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/examples/scripts" />
     </key>
   </component>
@@ -52,7 +63,7 @@
       <workItem from="1652263630829" duration="600000" />
       <workItem from="1652280304116" duration="597000" />
       <workItem from="1652686926479" duration="3022000" />
-      <workItem from="1657724051677" duration="882000" />
+      <workItem from="1657724051677" duration="1899000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,4 @@
-# Linear Least-Squares Inversion
+# Linear Least-Squares Inversion with Wavelet-based regularization
 
 # Here we demonstrate the basics of inverting data with SimPEG by considering a
 # linear inverse problem. We formulate the inverse problem as a least-squares
@@ -128,7 +128,7 @@ dmis = data_misfit.L2DataMisfit(simulation=sim, data=data_obj)
 # - db2, db3, db4 = rather sharp
 # - db5+ = rather smooth
 
-reg = regularization.WaveletRegularization1D(mesh, wav="db3")
+reg = regularization.WaveletRegularization1D(mesh, wav="db6")
 
 # Define how the optimization problem is solved.
 opt = optimization.InexactGaussNewton(maxIter=100, maxIterLS=20)
@@ -183,3 +183,27 @@ ax[1].set_ylim([-2, 2])
 ax[1].set_title("Wavelet-type " + reg.wavelets.wav)
 
 plt.show()
+
+##
+fig, ax_ls = plt.subplots(2,3, figsize=(12, 6))
+wav_list = ['db1', 'db2', 'db3', 'db4', 'db5', 'db6']
+betalist = [1e3, 1e4, 1e4, 1e4, 1e4, 1e4]
+for idx, wav in enumerate(wav_list):
+    reg = regularization.WaveletRegularization1D(mesh, wav=wav)
+    inv_prob = inverse_problem.BaseInvProblem(dmis, reg, opt)
+    inv_prob.beta = betalist[idx]
+    inv = inversion.BaseInversion(inv_prob, directives_list)
+
+    recovered_model = inv.run(starting_model)
+
+    ax_ls[idx//3, idx%3].plot(mesh.vectorCCx, true_model, "b-")
+    ax_ls[idx//3, idx%3].plot(mesh.vectorCCx, recovered_model, "r-")
+    ax_ls[idx//3, idx%3].legend(("True Model", "Recovered Model"))
+    # ax[1].set_ylim([-2, 2])
+    ax_ls[idx//3, idx%3].set_title("Wavelet-type " + reg.wavelets.wav)
+plt.tight_layout()
+fig.savefig('Ensemble.png')
+plt.show()
+
+##
+

@@ -1,4 +1,4 @@
-# Linear Least-Squares Inversion
+# Linear Least-Squares Inversion with Tikhonov-regularization
 
 # Here we demonstrate the basics of inverting data with SimPEG by considering a
 # linear inverse problem. We formulate the inverse problem as a least-squares
