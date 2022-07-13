@@ -1,10 +1,10 @@
 from setuptools import find_packages, setup
 my_pckg = find_packages(include=["wbi"])
-with open("README.rst") as f:
+with open("README.md") as f:
     LONG_DESCRIPTION = f.read()
 setup(
     name="wabi",
-    version="0.1.0",
+    version="0.1.1",
     packages=my_pckg,
     include_package_data=True,
     url="https://github.com/WouterDls/1D-wavelet-based-inversion",
@@ -12,7 +12,7 @@ setup(
     author="Wouter Deleersnyder",
     author_email="Wouter.Deleersnyder@kuleuven.be",
     description="Wavelet-based regularization scheme 1D inversion",
-    # long_description=LONG_DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
     install_requires=["numpy", "scipy", "cython", "simpeg", "PyWavelets"],
     classifiers=[
         'Intended Audience :: Science/Research',

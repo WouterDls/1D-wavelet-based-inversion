@@ -38,7 +38,7 @@ class WaveletRegularization1D(BaseRegularization):
         :param wav: wavelet type (default db1, which is blocky)
         """
         self.orientation = orientation
-        self.p = 1      # See Deleersnyder et al., 2021 for details.
+        self.p = 1  # See Deleersnyder et al., 2021 for details.
         self.eps = (
             1e-6  # perturbing parameter, default is 1e-6. Should be smaller than 1e-4.
         )
@@ -76,7 +76,7 @@ class WaveletRegularization1D(BaseRegularization):
 
     @utils.timeIt
     def __call__(self, m):
-        """
+        r"""
         We use a $\ell_1$ perturbed Ekblom measure as differentiable sparsity measure.
 
         .. math::
@@ -87,11 +87,11 @@ class WaveletRegularization1D(BaseRegularization):
 
         # Do the wavelet transform on each 1D snippet
         X = self.wavelets.W @ m.reshape(-1, 1)
-        return np.sum(self.R * np.sqrt(X**2 + self.eps))  # the actual measure
+        return np.sum(self.R * np.sqrt(X ** 2 + self.eps))  # the actual measure
 
     @utils.timeIt
     def deriv(self, m):
-        """
+        r"""
         Derivative of the measure.
 
         :param m: model
@@ -120,14 +120,14 @@ class WaveletRegularization1D(BaseRegularization):
         # Do the wavelet transform
         X = self.wavelets.W @ m.reshape(-1, 1)
         # Generate derivative w.r.t. x
-        deriv_x = self.R * X / np.sqrt(X**2 + self.eps)
+        deriv_x = self.R * X / np.sqrt(X ** 2 + self.eps)
         # Chain rule w.r.t. m
         deriv_m = self.wavelets.W.T @ deriv_x
         return (mD.T * deriv_m).flatten()  # Chain rule w.r.t. SimPEG mapping
 
     @utils.timeIt
     def deriv2(self, m, v=None):
-        """
+        r"""
         Second derivative of the measure.
 
         :param numpy.ndarray m: geophysical model
@@ -146,16 +146,18 @@ class WaveletRegularization1D(BaseRegularization):
         return mD.T * v
 
     def _generate_scale_dependency_vector(self, wavelet):
-        """
+        r"""
         Generate the scale-dependent-weights for each coefficient in X.
 
         :param wavelet: wavelet object
             Wavelet-coefficients corresponding to small-scale effects of the model are penalized more heavily.
             The scaling coefficient is never zero, so no regularization on the scaling coefficients.
-            .. math::
-             x = [v_{0,0}, w_{0,0}, w_{1,0},w_{1,1}, w_{2,1},w_{2,1}, \cdots, w_{n,k}, \cdots ]
 
-             \phi_m(x) =  \frac{1}{E} \sum_{n}^{N} 2^n\sum_k \mu(w_n,k)
+            .. math::
+
+                x = [v_{0,0}, w_{0,0}, w_{1,0},w_{1,1}, w_{2,1},w_{2,1}, \cdots, w_{n,k}, \cdots ]
+                \phi_m(x) =  \frac{1}{E} \sum_{n}^{N} 2^n\sum_k \mu(w_n,k)
+
         :param wavelet:contains info about the specific wavelet-transform
         """
         # Do wavelet decomposition (=transform)
@@ -165,14 +167,14 @@ class WaveletRegularization1D(BaseRegularization):
             [2 ** (j * self.p) * np.ones(c.shape) for j, c in enumerate(coeffs)]
         )
         scale_dependency_vector[
-            : coeffs[0].size
+        : coeffs[0].size
         ] = 0  # No regularization on scaling coefficients
         return scale_dependency_vector.reshape(-1, 1) / np.linalg.norm(
             scale_dependency_vector
         )  # Normalization, only valid vor 1D inversion (as in Deleersnyder et al, 2021)
 
     def _regularization_matrix(self):
-        """
+        r"""
         Generate the regularization matrix. This maps the scale-dependency on each element in the wavelet domain matrix X.
         """
         if self.mesh.dim == 1:
@@ -184,7 +186,7 @@ class WaveletRegularization1D(BaseRegularization):
 
 
 class Wavelet:
-    """
+    r"""
     The object containing all specific functionalities for a wavelet type.
 
     Parameters
@@ -240,7 +242,7 @@ class Wavelet:
 
     @property
     def wav(self):
-        """Wavelet family to use.
+        r"""Wavelet family to use.
         See Deleersnyder et al, 2021 for the rationale behind the choice of the optimal wavelet.
         In general, Daubechies (db) wavelets are prefered.
         -  db1 yields blocky inversion models
@@ -256,7 +258,7 @@ class Wavelet:
 
     @wav.setter
     def wav(self, type_):
-        """
+        r"""
         Set the wavelet family to use.
         :param type_: string
         """

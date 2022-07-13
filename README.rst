@@ -1,3 +1,7 @@
+[![DOI](https://zenodo.org/badge/487773353.svg)](https://zenodo.org/badge/latestdoi/487773353)
+[![Documentation Status](https://readthedocs.org/projects/1d-wavelet-based-inversion/badge/?version=latest)](https://1d-wavelet-based-inversion.readthedocs.io/en/latest/?badge=latest)
+
+
 # wavelet-based-inversion
 Scale-dependent wavelet-based regularization scheme for geophysical 1D  inversion
 
@@ -14,6 +18,10 @@ Daubechies (db) wavelets are ideal (see Deleersnyder et al, 2021), however, othe
 - Fits within the modular SimPEG framework (see [SimPEG website](https://simpeg.xyz/)) (see examples)
 - Fits within your own inversion codes (see examples with [empymod](https://empymod.emsig.xyz/en/stable/))
 
+#### Documentation
+
+https://1d-wavelet-based-inversion.readthedocs.io/en/latest/
+
 ### How to cite
 **The method:**
 
@@ -22,7 +30,9 @@ Deleersnyder, W., Maveau, B., Hermans, T., & Dudal, D. (2021). Inversion of elec
 Open Access version on [ResearchGate](https://www.researchgate.net/publication/351407378_Inversion_of_electromagnetic_induction_data_using_a_novel_wavelet-based_and_scale-dependent_regularization_term)
 
 **The code:**
-Deleersnyder, W., Thibaut, R., 2022. WBI - Scale-dependent 1D wavelet-based inversion in Python
+
+Wouter Deleersnyder, & Robin Thibaut. (2022). WouterDls/1D-wavelet-based-inversion: Wavelet-Based Inversion (0.1.0). Zenodo. https://doi.org/10.5281/zenodo.6552695
+
 ### Questions?
 Contact us on GitHub!
 - [Wouter Deleersnyder](https://github.com/WouterDls)

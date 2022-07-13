@@ -3,28 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to wbi's documentation!
-===============================
+Welcome to wabi's documentation!
+=========================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
 Installation
 ------------
 
-WBI is available through `PyPI <https://pypi.org/project/wbi/>`_, and may be installed using ``pip``: ::
+WABI is available through `PyPI <https://pypi.org/project/wabi/>`_, and may be installed using ``pip``: ::
 
-   $ pip install wbi
+   $ pip install wabi
 
 Contents
 -----------------
@@ -36,7 +27,7 @@ Contents
    examples.rst
 
 wavelet-based-inversion
-==================
+==========================================
 
 Scale-dependent wavelet-based regularization scheme for geophysical 1D  inversion.
 
@@ -61,7 +52,10 @@ Open Access version on `ResearchGate <https://www.researchgate.net/publication/3
 The code
 --------
 Deleersnyder, W., Thibaut, R., 2022. WBI - Scale-dependent 1D wavelet-based inversion in Python
+
 Questions?
+
 Contact us on GitHub!
+
 - `Wouter Deleersnyder <https://github.com/WouterDls>`_
 - `Robin Thibaut <https://github.com/RobinThibaut>`_

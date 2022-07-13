@@ -6,7 +6,7 @@ Examples
 .. toctree::
    :maxdepth: 1
 
-   ../examples/notebooks/simpeg_linearF_wavelets_1D.ipynb
+   ./examples/notebooks/simpeg_linearF_wavelets_1D.ipynb
 
 
 Download the examples as notebooks

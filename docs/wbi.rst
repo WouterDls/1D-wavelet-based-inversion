@@ -1,5 +1,5 @@
-wbi package
-===========
+wabi package
+===============
 
 Subpackages
 -----------
@@ -7,8 +7,9 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   wbi.testing
    wbi.wavelet_regularization
+   wbi.testing
+
 
 Module contents
 ---------------
