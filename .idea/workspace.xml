@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8a38fbb-cd14-4cef-8b66-39d44c9fc80c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/Code tests.ipynb" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/simpeg_linearF_wavelets_1D.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/simpeg_linearF_wavelets_1D.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +51,8 @@
       <workItem from="1652081283148" duration="625000" />
       <workItem from="1652263630829" duration="600000" />
       <workItem from="1652280304116" duration="597000" />
-      <workItem from="1652686926479" duration="2423000" />
+      <workItem from="1652686926479" duration="3022000" />
+      <workItem from="1657724051677" duration="882000" />
     </task>
     <servers />
   </component>
