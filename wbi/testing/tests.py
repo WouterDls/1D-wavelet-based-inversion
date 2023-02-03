@@ -81,3 +81,7 @@ def test_wavelet_regularization_1d():
 
     # Check that the recovered model is close to the reference model
     assert np.allclose(recovered_model, ref_model, atol=0.1)
+
+
+if __name__ == "__main__":
+    test_wavelet_regularization_1d()

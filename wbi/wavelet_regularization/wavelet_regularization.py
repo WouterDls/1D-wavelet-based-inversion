@@ -66,8 +66,11 @@ class WaveletRegularization1D(BaseRegularization):
                 "Mesh must have at least 3 dimensions to regularize along the "
                 "z-direction"
             )
-        # Generate the the scale-dependent-weights for each coefficient in X
+        # Generate the scale-dependent-weights for each coefficient in X
         self.R = self._regularization_matrix()
+        # pop DWTlevel from kwargs -- otherwise the base Simpeg class throws an error
+        # Alternatively, copy the dictionary for later use in the wavelet transform
+        self.DWTlevel = kwargs.pop("DWTlevel", 1)
         super(WaveletRegularization1D, self).__init__(mesh=mesh, **kwargs)
 
     @property
