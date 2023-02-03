@@ -4,7 +4,7 @@ with open("README.md") as f:
     LONG_DESCRIPTION = f.read()
 setup(
     name="wabi",
-    version="0.1.1",
+    version="0.1.2",
     packages=my_pckg,
     include_package_data=True,
     url="https://github.com/WouterDls/1D-wavelet-based-inversion",
