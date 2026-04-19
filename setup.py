@@ -13,7 +13,7 @@ setup(
     author_email="Wouter.Deleersnyder@kuleuven.be",
     description="Wavelet-based regularization scheme 1D inversion",
     long_description=LONG_DESCRIPTION,
-    install_requires=["numpy", "scipy", "cython", "simpeg", "PyWavelets"],
+    install_requires=["numpy", "scipy", "cython", "simpeg==0.15.2", "discretize==0.7.2", "PyWavelets==1.2.0"],
     classifiers=[
         'Intended Audience :: Science/Research',
         'License :: OSI Approved',
