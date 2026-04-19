@@ -5,6 +5,8 @@
 # wavelet-based-inversion
 Scale-dependent wavelet-based regularization scheme for geophysical 1D  inversion
 
+ 👉 _Looking for a version in 2D or higher? Reach out or check out our more recent paper [here](https://doi.org/10.1093/gji/ggad032)!_
+
 ![Ensemble of inversion models](docs/img/Ensemble.png)
 
 *This flexible inversion scheme allows to easily obtain blocky, smooth and intermediate inversion models. 

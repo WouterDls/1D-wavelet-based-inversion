@@ -25,7 +25,7 @@ copyright = '2022, Wouter Deleersnyder, Robin Thibaut'
 author = 'Wouter Deleersnyder, Robin Thibaut'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.1'
+release = '0.2.0'
 
 
 # -- General configuration ---------------------------------------------------

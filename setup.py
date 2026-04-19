@@ -4,16 +4,16 @@ with open("README.md") as f:
     LONG_DESCRIPTION = f.read()
 setup(
     name="wabi",
-    version="0.1.2",
+    version="0.2.0",
     packages=my_pckg,
     include_package_data=True,
     url="https://github.com/WouterDls/1D-wavelet-based-inversion",
     license="BSD-3",
     author="Wouter Deleersnyder",
-    author_email="Wouter.Deleersnyder@kuleuven.be",
+    author_email="wdls@eoas.ubc.ca",
     description="Wavelet-based regularization scheme 1D inversion",
     long_description=LONG_DESCRIPTION,
-    install_requires=["numpy", "scipy", "cython", "simpeg==0.15.2", "discretize==0.7.2", "PyWavelets==1.2.0"],
+    install_requires=["numpy", "scipy", "cython", "simpeg>=0.22", "discretize>=0.10", "PyWavelets"],
     classifiers=[
         'Intended Audience :: Science/Research',
         'License :: OSI Approved',

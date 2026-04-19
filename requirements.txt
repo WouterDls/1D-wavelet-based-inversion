@@ -1,6 +1,6 @@
 numpy
 scipy
 cython
-simpeg==0.15.2
-discretize==0.7.2
-PyWavelets==1.2.0
+simpeg==0.22
+discretize==0.10
+PyWavelets

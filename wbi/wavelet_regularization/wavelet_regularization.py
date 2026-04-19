@@ -4,8 +4,8 @@ import numpy as np
 
 import pywt
 
-from SimPEG import utils
-from SimPEG.regularization import BaseRegularization
+from simpeg import utils
+from simpeg.regularization import BaseRegularization
 from scipy.sparse import eye
 
 __all__ = ["WaveletRegularization1D"]
@@ -43,7 +43,6 @@ class WaveletRegularization1D(BaseRegularization):
             1e-6  # perturbing parameter, default is 1e-6. Should be smaller than 1e-4.
         )
         self.mesh = mesh
-        self.mrefInSmooth = False
         assert self.orientation in [
             "x",
             "y",
@@ -51,17 +50,17 @@ class WaveletRegularization1D(BaseRegularization):
         ], "Orientation must be 'x', 'y' or 'z'"
 
         if self.orientation == "x":
-            self.wavelets = Wavelet(wav, mesh.nCx, **kwargs)
+            self.wavelets = Wavelet(wav, mesh.shape_cells[0], **kwargs)
 
         elif self.orientation == "y":
-            self.wavelets = Wavelet(wav, mesh.nCy, **kwargs)
+            self.wavelets = Wavelet(wav, mesh.shape_cells[1], **kwargs)
             assert mesh.dim > 1, (
                 "Mesh must have at least 2 dimensions to regularize along the "
                 "y-direction"
             )
 
         elif self.orientation == "z":
-            self.wavelets = Wavelet(wav, mesh.nCz, **kwargs)
+            self.wavelets = Wavelet(wav, mesh.shape_cells[2], **kwargs)
             assert mesh.dim > 2, (
                 "Mesh must have at least 3 dimensions to regularize along the "
                 "z-direction"

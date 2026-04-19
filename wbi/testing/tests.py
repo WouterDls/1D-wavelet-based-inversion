@@ -1,7 +1,7 @@
 import os
 
 import numpy as np
-from SimPEG import (
+from simpeg import (
     simulation,
     maps,
     data_misfit,
@@ -27,9 +27,9 @@ def test_wavelet_regularization_1d():
     mesh = TensorMesh([nParam])
 
     true_model = np.zeros(mesh.nC)
-    true_model[mesh.vectorCCx > 0.3] = 1.0
-    true_model[mesh.vectorCCx > 0.45] = -0.5
-    true_model[mesh.vectorCCx > 0.6] = 0
+    true_model[mesh.cell_centers_x > 0.3] = 1.0
+    true_model[mesh.cell_centers_x > 0.45] = -0.5
+    true_model[mesh.cell_centers_x > 0.6] = 0
 
     model_map = maps.IdentityMap(mesh)
 
@@ -40,8 +40,8 @@ def test_wavelet_regularization_1d():
     q = 0.25
 
     def g(k):
-        return np.exp(p * jk[k] * mesh.vectorCCx) * np.cos(
-            np.pi * q * jk[k] * mesh.vectorCCx
+        return np.exp(p * jk[k] * mesh.cell_centers_x) * np.cos(
+            np.pi * q * jk[k] * mesh.cell_centers_x
         )
 
     G = np.empty((nData, nParam))
