@@ -13,7 +13,7 @@ setup(
     author_email="wdls@eoas.ubc.ca",
     description="Wavelet-based regularization scheme 1D inversion",
     long_description=LONG_DESCRIPTION,
-    install_requires=["numpy", "scipy", "cython", "simpeg>=0.22", "discretize>=0.10", "PyWavelets"],
+    install_requires=["numpy", "scipy", "cython", "simpeg==0.22.*", "discretize>=0.10", "PyWavelets"],
     classifiers=[
         'Intended Audience :: Science/Research',
         'License :: OSI Approved',
@@ -22,9 +22,8 @@ setup(
         'Operating System :: Microsoft :: Windows',
         'Operating System :: Unix',
         'Operating System :: MacOS',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
 )

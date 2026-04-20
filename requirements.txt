@@ -1,6 +1,6 @@
 numpy
 scipy
 cython
-simpeg==0.22
-discretize==0.10
+simpeg==0.22.*
+discretize>=0.10
 PyWavelets
